@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {FilterValuesType} from "./App";
+
+export type FilterValuesType = "all" | "active" | "complited"
 
 type TodoListPropsType = {
     title: string
@@ -14,15 +15,10 @@ export type TaskType = {
     isDone: boolean
 }
 
-export const TodoList = (
-    {
-        title,
-        tasks,
-        removeTask,
-        // changeTodoListFilter
-    }: TodoListPropsType) => {
+export const TodoList = ({// changeTodoListFilter
+title, tasks, removeTask }: TodoListPropsType) => {
 
-    const [filter, setFilter] = useState<FilterValuesType>("complited")
+    const [filter, setFilter] = useState<FilterValuesType>("active")
 
     // const changeTodoListFilter = (nextFilter: FilterValuesType) => {
     //     setFilter(nextFilter)
@@ -32,10 +28,10 @@ export const TodoList = (
     const getTasksForTodoList = (allTasks: Array<TaskType>, nextFilterValue: FilterValuesType) => {
         switch (nextFilterValue) {
             case "active":
-                return allTasks.filter(t => !t.isDone);
+                return allTasks.filter(t => t.isDone === false);
 
             case "complited":
-                return allTasks.filter(t => t.isDone);
+                return allTasks.filter(t => t.isDone === true);
 
             default:
                 return allTasks;
@@ -43,7 +39,6 @@ export const TodoList = (
     }
 
     const tasksForTodoList = getTasksForTodoList(tasks, filter)
-
 
     const tasksList = tasksForTodoList.map(task => {
         const removeTaskHandler = () => removeTask(task.id)

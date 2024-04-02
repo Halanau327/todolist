@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, TodoList} from "./TodoList";
 
-export type FilterValuesType = "all" | "active" | "complited"
-
 function App() {
     const todoListTitle = "What to learn"
     // state - ключевые данные
@@ -14,18 +12,17 @@ function App() {
         {id:3, title: "REACT", isDone: false}
     ])
 
-    const removeTask = (taskId: number) => {
+    const deleteTask = (taskId: number) => {
         const newState = tasks.filter(t => t.id !== taskId)
         setTasks(newState)
     }
 // local state
 
-
     return (
         <div className="App">
             <TodoList title={todoListTitle}
                       tasks={tasks}
-                      removeTask={removeTask}/>
+                      removeTask={deleteTask}/>
         </div>
     );
 }
