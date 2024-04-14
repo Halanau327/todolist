@@ -33,11 +33,10 @@ export const TodoList = ({title, taskArray, removeTask, addTask}: TodoListPropsT
 
     const tasksForTodoList = getTasksForTodoList(taskArray, filter)
 
-    const [taskTitle, setTaskTitle] = useState("")
+    const [taskTitle, setTaskTitle] = useState("") // state хранит введенное значение для новой таски
 
-    // const isTitleTooLong = taskTitle.length >= 15
-    // const ifTaskCanAdded = taskTitle && !isTitleTooLong
-
+    const isTitleTooLong = taskTitle.length >= 15
+    const ifTaskCanAdded = taskTitle && !isTitleTooLong
 
     const tasksList: Array<JSX.Element> | JSX.Element = tasksForTodoList.length
         ? tasksForTodoList.map((task) => {
@@ -58,16 +57,21 @@ export const TodoList = ({title, taskArray, removeTask, addTask}: TodoListPropsT
     }
 
     const onClickAddTaskHandler = () => {
-        addTask(taskTitle)
-        setTaskTitle("")
+        if (taskTitle.trim() !== "") {
+            addTask(taskTitle.trim())
+            setTaskTitle("")
+        }
     }
 
-    const onChangeSetTaskTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTaskTitle(e.currentTarget.value)
+    const onChangeSetTaskTitle = (event: ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle(event.currentTarget.value)
     }
 
-    const onKeyDownAddTaskHandler = (e: KeyboardEvent) => {
-        if (e.key === "Enter" || !taskTitle && (taskTitle.length >= 15)) {
+    const onKeyDownAddTaskHandler = (event: KeyboardEvent) => {
+        if (taskTitle.trim() === "") {
+            return;
+        }
+        if (event.key === "Enter" || !taskTitle && !isTitleTooLong) {
             onClickAddTaskHandler()
         }
     }
@@ -81,8 +85,7 @@ export const TodoList = ({title, taskArray, removeTask, addTask}: TodoListPropsT
                     onChange={onChangeSetTaskTitle}
                     onKeyDown={onKeyDownAddTaskHandler}
                 />
-                <Button title="+" onClick={onClickAddTaskHandler} disabled={!taskTitle || (taskTitle.length >= 15)}/>
-                {/*{taskTitle.length > 15 && <div>Your task title is too long</div>}*/}
+                <Button title="+" onClick={onClickAddTaskHandler} disabled={!taskTitle || isTitleTooLong}/>
             </div>
             <ul>
                 {tasksList}

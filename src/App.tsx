@@ -6,7 +6,6 @@ import {v1} from "uuid";
 function App() {
     const todoListTitle = "What to learn"
 
-
     const [tasks, setTasks] = useState<TaskType[]>([
         {id:v1(), title: "HTML & CSS", isDone: true},
         {id:v1(), title: "JS", isDone: true},
