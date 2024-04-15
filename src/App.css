@@ -14,3 +14,31 @@
   background-color: cadetblue;
   padding: 15px;
 }
+
+.task {
+  font-weight: bold;
+}
+
+.task-done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.filter-btn-active {
+  background-color: chocolate;
+  color: white;
+  font-weight: bold;
+  border: 2px solid chocolate;
+  border-radius: 3px;
+}
+
+.task-input-error {
+  border: 3px solid red;
+  outline: none;
+}
+
+.task-input-error-message {
+  font-weight: bold;
+  color: red;
+
+}
