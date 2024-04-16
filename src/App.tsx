@@ -8,8 +8,8 @@ function App() {
     const todoListTitle = "What to learn"
 
     const [tasks, setTasks] = useState<TaskType[]>([
-        {id:v1(), title: "HTML & CSS", isDone: true},
-        {id:v1(), title: "JS", isDone: true},
+        {id:v1(), title: "HTML & CSS", isDone: false},
+        {id:v1(), title: "JS", isDone: false},
         {id:v1(), title: "REACT", isDone: false}
     ])
 

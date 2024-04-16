@@ -24,12 +24,17 @@
   opacity: 0.5;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 .filter-btn-active {
   background-color: chocolate;
   color: white;
   font-weight: bold;
   border: 2px solid chocolate;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .task-input-error {
@@ -40,5 +45,6 @@
 .task-input-error-message {
   font-weight: bold;
   color: red;
-
 }
+
+

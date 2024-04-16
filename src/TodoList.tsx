@@ -20,7 +20,7 @@ type TodoListPropsType = {
 export const TodoList = ({title, taskArray, removeTask, addTask, changeTaskStatus}: TodoListPropsType) => {
 
     const [filter, setFilter] = useState<FilterValueType>("all")
-    const [taskTitle, setTaskTitle] = useState("") // state хранит введенное значение для новой таски
+    const [taskTitle, setTaskTitle] = useState("") // state keeps an entered value for new task
     const [taskInputError, setTaskInputError] = useState <string | null>(null)
 
     const getTasksForTodoList = (tasks: TaskType[], filterValue: FilterValueType) => {
@@ -74,12 +74,8 @@ export const TodoList = ({title, taskArray, removeTask, addTask, changeTaskStatu
     }
 
     const onKeyDownAddTaskHandler = (event: KeyboardEvent) => {
-        if (taskTitle.trim() === "") {
-            return;
-        }
-        if (event.key === "Enter" || !taskTitle && !isTitleTooLong) {
-            onClickAddTaskHandler()
-        }
+        setTaskInputError(null) // clear the input when any button is clicked
+        return taskTitle.trim() === "" ? null : event.key === "Enter" ? onClickAddTaskHandler() : null
     }
 
     return (
@@ -87,12 +83,14 @@ export const TodoList = ({title, taskArray, removeTask, addTask, changeTaskStatu
             <h3>{title}</h3>
             <div>
                 <input
-                    className={"task-input-error" ? "task-input-error" : ""}
+                    className={taskInputError ? "task-input-error" : ""}
                     value={taskTitle}
                     onChange={onChangeSetTaskTitle}
                     onKeyDown={onKeyDownAddTaskHandler}
                 />
                 <Button title="+" onClick={onClickAddTaskHandler} disabled={!taskTitle || isTitleTooLong}/>
+
+                {/*разобрать!!!!!*/}
                 {!!taskInputError && <div className="task-input-error-message">{taskInputError}</div>}
 
 
@@ -101,13 +99,13 @@ export const TodoList = ({title, taskArray, removeTask, addTask, changeTaskStatu
                 {tasksList}
             </ul>
             <div>
-                <Button styles={filter === "all" ? "filter-btn-active" : ""}
+                <Button styles={filter === "all" ? "filter-btn-active" : "btn"}
                         title={'All'}
                         onClick={onClickHandlerCreator("all")}/>
-                <Button styles={filter === "active" ? "filter-btn-active" : ""}
+                <Button styles={filter === "active" ? "filter-btn-active" : "btn"}
                         title={'Active'}
                         onClick={onClickHandlerCreator("active")}/>
-                <Button styles={filter === "completed" ? "filter-btn-active" : ""}
+                <Button styles={filter === "completed" ? "filter-btn-active" : "btn"}
                         title={'Completed'}
                         onClick={onClickHandlerCreator("completed")}/>
             </div>
