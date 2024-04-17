@@ -3,6 +3,7 @@ import {TodoList} from "./TodoList";
 import {TaskType} from "./TodoList";
 import {v1} from "uuid";
 import "./App.css"
+import {Counter} from "./Counter";
 
 function App() {
     const todoListTitle = "What to learn"
@@ -40,12 +41,13 @@ function App() {
 
     return (
         <div className="App">
-            <TodoList title={todoListTitle}
-                      taskArray={tasks}
-                      removeTask={removeTask}
-                      addTask={addTask}
-                      changeTaskStatus={changeTaskStatus}
-            />
+            {/*<TodoList title={todoListTitle}*/}
+            {/*          taskArray={tasks}*/}
+            {/*          removeTask={removeTask}*/}
+            {/*          addTask={addTask}*/}
+            {/*          changeTaskStatus={changeTaskStatus}*/}
+            {/*/>*/}
+            <Counter/>
         </div>
     );
 }
